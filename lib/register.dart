@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_declarations, unused_import, unused_field
+// ignore_for_file: unused_import, unused_field
 
 import 'dart:convert'; // For base64 decoding
 import 'dart:typed_data'; // For Uint8List
@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _teamNameController = TextEditingController();
   final TextEditingController _captainNameController = TextEditingController();
   final TextEditingController _captainEmailController = TextEditingController();
   final TextEditingController _captainMobileController = TextEditingController();
@@ -45,6 +46,12 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            _buildTextField(
+              controller: _teamNameController,
+              icon: Icons.group,
+              labelText: 'Team Name',
+            ),
+            SizedBox(height: 16),
             _buildTextField(
               controller: _captainNameController,
               icon: Icons.person,
