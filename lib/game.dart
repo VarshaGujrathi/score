@@ -10,7 +10,7 @@ class GamePage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
           onPressed: () {
-            Navigator.pop(context); // Navigate back
+            Navigator.pop(context); // Navigate backflu
           },
         ),
         backgroundColor: Colors.white, // AppBar background color white

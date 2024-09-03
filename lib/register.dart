@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, unused_field
+// ignore_for_file: unused_import, unused_field, avoid_web_libraries_in_flutter, use_key_in_widget_constructors
 
 import 'dart:convert'; // For base64 decoding
 import 'dart:typed_data'; // For Uint8List
