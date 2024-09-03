@@ -1,0 +1,41 @@
+name: score
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  dots_indicator: ^3.0.0
+  firebase_core: ^3.4.0
+  firebase_auth: ^5.2.0
+  cloud_firestore: ^5.3.0
+  firebase_storage: ^12.2.0
+  image_picker: ^1.1.2
+  fl_chart: ^0.69.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/basketball.jpeg
+    - assets/football.jpeg
+    - assets/logo.jpg
+    - assets/logo2.jpg
+    - assets/splash_black.png
+    - assets/splash_white.png
+    - assets/bad_cllg.png
+    - assets/cricket_cllg.png
+    - assets/foot_cllg.png
+    - assets/volley_cllg.png
+    - assets/g_badminton.png
+    - assets/g_football.jpg
+    - assets/g_volleyball.jpg
+    - assets/adjust.png
+    - assets/student.png
+    - assets/event.png
+    - assets/scorelogin.png
