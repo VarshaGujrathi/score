@@ -1,16 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'event_lead.dart'; // Import EventLeadPage
-import 'schedule_event.dart'; // Import SchedulePage
-
-void main() {
-  runApp(MaterialApp(
-  initialRoute: '/',
-  routes: {
-    '/leaderboard': (context) => EventLeadPage(),
-    '/schedule': (context) => EventSchedulePage(),
-  },
-  ));
-}
+import 'schedule_event.dart'; // Import ScheduleEventPage
 
 class EventDashPage extends StatefulWidget {
   @override

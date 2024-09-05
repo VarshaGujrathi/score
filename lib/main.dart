@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'splash.dart'; // Import the new splash screen file
+
+import 'event_lead.dart'; // Import EventLeadPage
+import 'schedule_event.dart'; // Import ScheduleEventPage
+import 'splash.dart'; // Import the splash screen file
 
 void main() {
   runApp(MyApp());
@@ -10,7 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Remove the debug banner
-      home: SplashPage(), // Set the SplashPage as the initial page
+      initialRoute: '/', // Set initial route
+      routes: {
+        '/': (context) => SplashPage(),
+        '/leaderboard': (context) => EventLeadPage(),
+        '/schedule': (context) => ScheduleEventPage(),
+      },
     );
   }
 }
