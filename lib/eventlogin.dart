@@ -1,5 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
-import 'dashboard.dart'; // Import the DashboardPage class
+import 'package:score/eventdash.dart';
+
 
 class EventLoginPage extends StatelessWidget {
   @override
@@ -54,18 +57,19 @@ class EventLoginPage extends StatelessWidget {
             ),
             SizedBox(height: 20), // Space between password field and button
 
-            // Login button
+            // Login button with reduced padding
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardPage()),
+                  MaterialPageRoute(builder: (context) => EventDashPage()),
                 );
               },
               child: Text('Login'),
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.black, // Text color white
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32), // Add padding
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.black, // Text color white
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Reduced padding
               ),
             ),
           ],

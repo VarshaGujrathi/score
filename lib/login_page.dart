@@ -25,10 +25,10 @@ class _LoginPageState extends State<LoginPage> {
               // Image above Welcome Text
               Image.asset(
                 'assets/scorelogin.png', // Path to the image asset
-                height: 100, // Adjust height as needed
-                width: 200, // Adjust width as needed
+                height: 90, // Adjust height as needed
+                width: 150, // Adjust width as needed
               ),
-              SizedBox(height: 20), // Space between image and Welcome text
+              SizedBox(height: 10), // Space between image and Welcome text
 
               // Welcome Text
               Text(
@@ -75,18 +75,17 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black, // Button color
                   padding: EdgeInsets.symmetric(
-                      horizontal: 50, vertical: 15), // Adjust padding as needed
+                      horizontal: 40, vertical: 12), // Reduced padding
                 ),
                 child: Text(
                   'Login',
                   style: TextStyle(
                     color: Colors.white, // Text color
-                    fontSize: 18, // Adjust font size as needed
+                    fontSize: 16, // Reduced font size
                   ),
                 ),
               ),
-              SizedBox(
-                  height: 20), // Space between button and create account link
+              SizedBox(height: 20), // Space between button and create account link
 
               // Create Account Link
               Row(
@@ -95,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Haven't created an account? ",
                     style: TextStyle(
-                      fontSize: 16, // Adjust font size as needed
+                      fontSize: 14, // Reduced font size
                     ),
                   ),
                   TextButton(
@@ -111,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                       'Create Account',
                       style: TextStyle(
                         color: Colors.blue, // Link color
-                        fontSize: 16, // Adjust font size as needed
+                        fontSize: 14, // Reduced font size
                         fontWeight: FontWeight.bold,
                       ),
                     ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class EventLeadPage extends StatelessWidget {
+class EventSchedulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Leaderboard'),
+        title: Text('Schedule'),
       ),
       body: Center(
-        child: Text('Leaderboard Page Content'),
+        child: Text('Schedule Page Content'),
       ),
     );
   }

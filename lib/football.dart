@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:score/LeaderboardPage';
+import 'package:score/LeaderboardPage.dart'; // Fixed import statement
 import 'package:score/SchedulePage.dart';
 import 'package:score/register.dart'; 
 
@@ -17,7 +17,10 @@ class FootballPage extends StatelessWidget {
         ),
         backgroundColor: Colors.white, // AppBar background color white
         elevation: 0, // Remove shadow
-        // Title text color black
+        title: Text(
+          'Football Page',
+          style: TextStyle(color: Colors.black), // Title text color black
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -26,13 +29,13 @@ class FootballPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildFootballButton(context, Icons.person, 'Registration', RegisterPage()),
-            SizedBox(height: 16),
+            SizedBox(height: 12), // Reduced space between buttons
             _buildFootballButton(context, Icons.leaderboard, 'Leaderboard', LeaderboardPage()),
-            SizedBox(height: 16),
-            _buildFootballButton(context, Icons.schedule, 'Schedule', SchedulePage()), // Navigate to SchedulePage
-            SizedBox(height: 16),
+            SizedBox(height: 12), // Reduced space between buttons
+            _buildFootballButton(context, Icons.schedule, 'Schedule', SchedulePage()),
+            SizedBox(height: 12), // Reduced space between buttons
             _buildFootballButton(context, Icons.book, 'Rulebook', RegisterPage()), // Replace with actual page
-            SizedBox(height: 16),
+            SizedBox(height: 12), // Reduced space between buttons
             _buildFootballButton(context, Icons.emoji_events, 'Winner', RegisterPage()), // Replace with actual page
           ],
         ),
@@ -54,19 +57,20 @@ class FootballPage extends StatelessWidget {
       icon: Icon(
         icon,
         color: Colors.black, // Icon color black
+        size: 20, // Reduced icon size
       ),
       label: Text(
         label,
         style: TextStyle(
           color: Colors.black, // Text color black
           fontWeight: FontWeight.bold, // Bold text
+          fontSize: 16, // Reduced font size
         ),
       ),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white, // Button background color white
-        padding:
-            EdgeInsets.symmetric(vertical: 16), // Add padding for better UI
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Reduced padding
       ),
     );
   }

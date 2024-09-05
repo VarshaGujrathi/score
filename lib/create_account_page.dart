@@ -202,26 +202,43 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     SizedBox(height: 20),
 
                     // Submit Button
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Navigate to the GamePage
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => GamePage()),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      ),
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
+                    Container(
+                      width: double.infinity, // Fill available width
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            // Show success dialog or navigate to the next page
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Icon(Icons.check_circle, color: Colors.green, size: 50),
+                                content: Text('Account Created Successfully'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => GamePage()),
+                                      );
+                                    },
+                                    child: Text('OK'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Adjust padding
+                        ),
+                        icon: Icon(Icons.check, color: Colors.white),
+                        label: Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16, // Font size
+                          ),
                         ),
                       ),
                     ),

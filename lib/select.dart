@@ -38,8 +38,8 @@ class _SelectPageState extends State<SelectPage> {
                       borderRadius: BorderRadius.circular(15),
                       child: Image.asset(
                         'assets/student.png',
-                        height: 200,
-                        width: 200,
+                        height: 100, // Reduced height for smaller image
+                        width: 100,  // Reduced width for smaller image
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -77,8 +77,8 @@ class _SelectPageState extends State<SelectPage> {
                       borderRadius: BorderRadius.circular(15),
                       child: Image.asset(
                         'assets/event.png',
-                        height: 200,
-                        width: 200,
+                        height: 100, // Reduced height for smaller image
+                        width: 100,  // Reduced width for smaller image
                         fit: BoxFit.cover,
                       ),
                     ),

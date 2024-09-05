@@ -33,11 +33,11 @@ class _SplashPageState extends State<SplashPage> {
               child: _showFirstImage
                   ? Container(
                       key: ValueKey(1),
-                      width: 200,
-                      height: 200,
+                      width: 150, // Decreased width for mobile
+                      height: 150, // Decreased height for mobile
                       decoration: BoxDecoration(
                         color: Colors.black,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
@@ -52,7 +52,7 @@ class _SplashPageState extends State<SplashPage> {
                         ),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(15),
                         child: Image.asset(
                           'assets/logo2.jpg',
                           fit: BoxFit.cover,
@@ -61,8 +61,8 @@ class _SplashPageState extends State<SplashPage> {
                     )
                   : Container(
                       key: ValueKey(2),
-                      width: 300,
-                      height: 300,
+                      width: 200, // Decreased width for mobile
+                      height: 200, // Decreased height for mobile
                       child: Image.asset(
                         'assets/splash_white.png',
                         fit: BoxFit.contain,
@@ -72,7 +72,7 @@ class _SplashPageState extends State<SplashPage> {
           ),
           if (!_showFirstImage) // Only show button if not showing the first image
             Positioned(
-              bottom: 50,
+              bottom: 75, // Adjusted for mobile
               left: 0,
               right: 0,
               child: Center(
@@ -83,17 +83,17 @@ class _SplashPageState extends State<SplashPage> {
                       MaterialPageRoute(builder: (context) => SelectPage()),
                     );
                   },
-                  icon: Icon(Icons.arrow_forward, color: Colors.white),
+                  icon: Icon(Icons.arrow_forward, color: Colors.white, size: 18), // Reduced icon size for mobile
                   label: Text(
                     "Get Started",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 14), // Reduced text size for mobile
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(25), // Reduced border radius for mobile
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10), // Reduced padding for mobile
                   ),
                 ),
               ),

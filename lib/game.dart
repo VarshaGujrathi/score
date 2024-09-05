@@ -10,7 +10,7 @@ class GamePage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black), // Back arrow icon
           onPressed: () {
-            Navigator.pop(context); // Navigate backflu
+            Navigator.pop(context); // Navigate back
           },
         ),
         backgroundColor: Colors.white, // AppBar background color white
@@ -22,21 +22,19 @@ class GamePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildGameButton(context, Icons.sports_soccer, 'Football'),
-            SizedBox(height: 16),
-            _buildGameButton(context, Icons.sports_volleyball, 'Volleyball'),
-            SizedBox(height: 16),
-            _buildGameButton(context, Icons.sports_cricket, 'Cricket'),
-            SizedBox(height: 16),
-            _buildGameButton(context, Icons.sports_tennis,
-                'Badminton'), // Tennis icon instead of badminton
-            SizedBox(height: 16),
-            _buildGameButton(context, Icons.sports_handball, 'Throwball'),
-            SizedBox(height: 16),
-            _buildGameButton(context, Icons.directions_run, 'Track'),
-            SizedBox(height: 16),
-            _buildGameButton(context, Icons.extension,
-                'Chess'), // Extension icon as a placeholder for chess
+            _buildGameButton(context, Icons.sports_soccer, 'Football', FootballPage()),
+            SizedBox(height: 12),
+            _buildGameButton(context, Icons.sports_volleyball, 'Volleyball', null),
+            SizedBox(height: 12),
+            _buildGameButton(context, Icons.sports_cricket, 'Cricket', null),
+            SizedBox(height: 12),
+            _buildGameButton(context, Icons.sports_tennis, 'Badminton', null), // Tennis icon instead of badminton
+            SizedBox(height: 12),
+            _buildGameButton(context, Icons.sports_handball, 'Throwball', null),
+            SizedBox(height: 12),
+            _buildGameButton(context, Icons.directions_run, 'Track', null),
+            SizedBox(height: 12),
+            _buildGameButton(context, Icons.extension, 'Chess', null), // Extension icon as a placeholder for chess
           ],
         ),
       ),
@@ -44,31 +42,33 @@ class GamePage extends StatelessWidget {
   }
 
   // Helper method to create game buttons with icon and text
-  Widget _buildGameButton(BuildContext context, IconData icon, String label) {
+  Widget _buildGameButton(BuildContext context, IconData icon, String label, Widget? navigateToPage) {
     return ElevatedButton.icon(
       onPressed: () {
-        // Navigate to the GamePage
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => FootballPage()),
-        );
+        if (navigateToPage != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => navigateToPage),
+          );
+        }
       },
       icon: Icon(
         icon,
         color: Colors.black, // Icon color black
+        size: 20, // Reduce the icon size
       ),
       label: Text(
         label,
         style: TextStyle(
           color: Colors.black, // Text color black
           fontWeight: FontWeight.bold, // Bold text
+          fontSize: 16, // Reduce the font size
         ),
       ),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white, // Text and icon color black
-        padding:
-            EdgeInsets.symmetric(vertical: 16), // Add padding for better UI
+        padding: EdgeInsets.symmetric(vertical: 12), // Reduced padding
       ),
     );
   }

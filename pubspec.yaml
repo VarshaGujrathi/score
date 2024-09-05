@@ -23,20 +23,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/basketball.jpeg
-    - assets/football.jpeg
     - assets/logo.jpg
     - assets/logo2.jpg
-    - assets/splash_black.png
     - assets/splash_white.png
-    - assets/bad_cllg.png
-    - assets/cricket_cllg.png
-    - assets/foot_cllg.png
-    - assets/volley_cllg.png
-    - assets/g_badminton.png
-    - assets/g_football.jpg
-    - assets/g_volleyball.jpg
-    - assets/adjust.png
     - assets/student.png
     - assets/event.png
     - assets/scorelogin.png
