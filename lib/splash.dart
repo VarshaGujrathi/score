@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'select.dart'; // Ensure the path is correct
+import 'package:score/login_page.dart';
+
+// Ensure the path is correct
 
 class SplashPage extends StatefulWidget {
   @override
@@ -80,20 +82,27 @@ class _SplashPageState extends State<SplashPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SelectPage()),
+                      MaterialPageRoute(builder: (context) => LoginPage()),
                     );
                   },
-                  icon: Icon(Icons.arrow_forward, color: Colors.white, size: 18), // Reduced icon size for mobile
+                  icon: Icon(Icons.arrow_forward,
+                      color: Colors.white,
+                      size: 18), // Reduced icon size for mobile
                   label: Text(
                     "Get Started",
-                    style: TextStyle(color: Colors.white, fontSize: 14), // Reduced text size for mobile
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14), // Reduced text size for mobile
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25), // Reduced border radius for mobile
+                      borderRadius: BorderRadius.circular(
+                          25), // Reduced border radius for mobile
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10), // Reduced padding for mobile
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10), // Reduced padding for mobile
                   ),
                 ),
               ),

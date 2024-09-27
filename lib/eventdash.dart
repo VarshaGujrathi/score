@@ -1,8 +1,10 @@
 // ignore_for_file: unused_import
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'event_lead.dart'; // Import EventLeadPage
-import 'schedule_event.dart'; // Import ScheduleEventPage
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:score/SchedulePage.dart';
+import 'package:score/event_Lead_page.dart';
 
 class EventDashPage extends StatefulWidget {
   @override
@@ -10,161 +12,224 @@ class EventDashPage extends StatefulWidget {
 }
 
 class _EventDashPageState extends State<EventDashPage> {
-  // Sample student/team data
-  List<Map<String, dynamic>> studentData = [
-    {
-      'Team Name': 'Team A',
-      'Captain Name': 'John Doe',
-      'Captain Mob. No': '1234567890',
-      'Registration Status': 'Unpaid',
-      'Sports': 'Football',
-    },
-    {
-      'Team Name': 'Team B',
-      'Captain Name': 'Jane Smith',
-      'Captain Mob. No': '0987654321',
-      'Registration Status': 'Unpaid',
-      'Sports': 'Basketball',
-    },
-    // Add more student/team data as needed
-  ];
+  String? selectedGame; // For filtering by game
+  String? selectedPaymentStatus; // For filtering by payment status
+  String? sortBy; // For sorting options
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white, // Set the background color to white
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
-        leading: PopupMenuButton<int>(
-          icon: Icon(Icons.menu),
-          onSelected: (value) {
-            if (value == 0) {
-              Navigator.pushNamed(context, '/leaderboard');
-            } else if (value == 1) {
-              Navigator.pushNamed(context, '/schedule');
-            }
-          },
-          itemBuilder: (context) => [
-            PopupMenuItem<int>(
-              value: 0,
-              child: ListTile(
-                leading: Icon(Icons.leaderboard, color: Colors.black),
-                title: Text('Leaderboard'),
-              ),
-            ),
-            PopupMenuItem<int>(
-              value: 1,
-              child: ListTile(
-                leading: Icon(Icons.schedule, color: Colors.black),
-                title: Text('Schedule'),
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: MediaQuery.of(context).size.width,
-            ),
-            child: Table(
-              border: TableBorder.all(color: Colors.black),
-              columnWidths: const <int, TableColumnWidth>{
-                0: FlexColumnWidth(2),
-                1: FlexColumnWidth(2),
-                2: FlexColumnWidth(2),
-                3: FlexColumnWidth(2),
-                4: FlexColumnWidth(2),
-                5: FlexColumnWidth(2),
-              },
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: [
-                TableRow(
-                  decoration: BoxDecoration(color: Colors.black),
-                  children: [
-                    tableCellText('Team Name', isHeader: true),
-                    tableCellText('Captain Name', isHeader: true),
-                    tableCellText('Sports', isHeader: true),
-                    tableCellText('Captain Mob.No', isHeader: true),
-                    tableCellText('Status', isHeader: true),
-                    tableCellText('Action', isHeader: true),
-                  ],
-                ),
-                ...studentData.map((student) {
-                  return TableRow(
-                    children: [
-                      tableCellText(student['Team Name']),
-                      tableCellText(student['Captain Name']),
-                      tableCellText(student['Sports']),
-                      tableCellText(student['Captain Mob. No']),
-                      tableCellStatus(student['Registration Status']),
-                      tableCellAction(),
-                    ],
-                  );
-                }).toList(),
-              ],
-            ),
+        title: Text('Event Dashboard'),
+        actions: [
+          // Filter by Game Dropdown
+          DropdownButton<String>(
+            hint: Text("Filter by Game", style: TextStyle(color: Colors.black)),
+            value: selectedGame,
+            icon: Icon(Icons.arrow_downward, color: Colors.black),
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedGame = newValue;
+              });
+            },
+            items: <String>[
+              'All Games',
+              'Football',
+              'Cricket',
+              'Volleyball',
+              'Badminton',
+              'Throwball',
+              'Track'
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value == 'All Games' ? null : value,
+                child: Text(value, style: TextStyle(color: Colors.black)),
+              );
+            }).toList(),
           ),
-        ),
-      ),
-    );
-  }
+          SizedBox(width: 20),
 
-  Widget tableCellText(String text, {bool isHeader = false}) {
-    return Padding(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
-          color: isHeader ? Colors.white : Colors.black,
-          fontSize: MediaQuery.of(context).size.width * 0.04,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+          // Filter by Payment Status Dropdown
+          DropdownButton<String>(
+            hint: Text("Payment Status", style: TextStyle(color: Colors.black)),
+            value: selectedPaymentStatus,
+            icon: Icon(Icons.arrow_downward, color: Colors.black),
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedPaymentStatus = newValue;
+              });
+            },
+            items: <String>['All', 'Completed', 'Pending']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value == 'All' ? null : value,
+                child: Text(value, style: TextStyle(color: Colors.black)),
+              );
+            }).toList(),
+          ),
+          SizedBox(width: 20),
 
-  Widget tableCellStatus(String status) {
-    bool isUnpaid = status == 'Unpaid';
-    return Padding(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
-      child: Checkbox(
-        value: !isUnpaid,
-        onChanged: (bool? newValue) {
-          setState(() {
-            // Update the registration status based on the checkbox
-            studentData.firstWhere((student) => student['Registration Status'] == status)['Registration Status'] =
-                newValue! ? 'Paid' : 'Unpaid';
-          });
-        },
-        checkColor: Colors.white,
-        activeColor: Colors.green,
-        side: BorderSide(color: Colors.black),
-      ),
-    );
-  }
+          // Sort Dropdown
+          DropdownButton<String>(
+            hint: Text("Sort by", style: TextStyle(color: Colors.black)),
+            value: sortBy,
+            icon: Icon(Icons.sort, color: Colors.black),
+            onChanged: (String? newValue) {
+              setState(() {
+                sortBy = newValue;
+              });
+            },
+            items: <String>['Game', 'Payment Status']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value, style: TextStyle(color: Colors.black)),
+              );
+            }).toList(),
+          ),
+          SizedBox(width: 20),
 
-  Widget tableCellAction() {
-    return Padding(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
-      child: IconButton(
-        icon: Icon(Icons.notifications),
-        color: const Color.fromARGB(255, 240, 173, 27),
-        onPressed: () {
-          // Display a snack bar when the action button is pressed
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Reminder icon clicked'),
-            ),
+          // Menu Icon Button
+          PopupMenuButton<String>(
+            icon: Icon(Icons.menu, color: Colors.black),
+            onSelected: (String value) {
+              if (value == 'Leaderboard') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EventLeadPage()),
+                );
+              } else if (value == 'Schedule') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SchedulePage()),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return {'Leaderboard', 'Schedule'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice, style: TextStyle(color: Colors.black)),
+                );
+              }).toList();
+            },
+          ),
+        ],
+      ),
+      body: StreamBuilder(
+        stream: _getFilteredAndSortedRegistrations(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Error fetching data'));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(child: Text('No registrations found'));
+          }
+
+          return ListView(
+            children: snapshot.data!.docs.map((doc) {
+              var data = doc.data() as Map<String, dynamic>;
+              return Card(
+                margin: EdgeInsets.all(10),
+                child: ListTile(
+                  title: Text(data['teamName'] ?? 'No team name'),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Captain: ${data['captainName']}'),
+                      Text('Game: ${data['game']}'),
+                      Text('Payment Status: ${data['paymentStatus']}'),
+                    ],
+                  ),
+                  trailing: data['paymentStatus'] == 'Completed'
+                      ? Icon(Icons.check_circle, color: Colors.green)
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.error, color: Colors.red),
+                            SizedBox(width: 8),
+                            ElevatedButton(
+                              onPressed: () {
+                                _verifyPayment(doc.id, data['captainEmail']);
+                              },
+                              child: Text('Verify'),
+                            ),
+                          ],
+                        ),
+                ),
+              );
+            }).toList(),
           );
         },
       ),
     );
+  }
+
+  // Function to build the query based on filters and sorting
+  Stream<QuerySnapshot> _getFilteredAndSortedRegistrations() {
+    Query query = FirebaseFirestore.instance.collection('registrations');
+
+    // Apply game filter if selected
+    if (selectedGame != null && selectedGame != 'All Games') {
+      query = query.where('game', isEqualTo: selectedGame);
+    }
+
+    // Apply payment status filter if selected
+    if (selectedPaymentStatus != null && selectedPaymentStatus != 'All') {
+      query = query.where('paymentStatus', isEqualTo: selectedPaymentStatus);
+    }
+
+    // Apply sorting
+    if (sortBy == 'Game') {
+      query = query.orderBy('game');
+    } else if (sortBy == 'Payment Status') {
+      query = query.orderBy('paymentStatus');
+    }
+
+    return query.snapshots();
+  }
+
+  // Function to verify payment status and send email notification
+  Future<void> _verifyPayment(String docId, String captainEmail) async {
+    try {
+      // Update payment status in Firestore
+      await FirebaseFirestore.instance
+          .collection('registrations')
+          .doc(docId)
+          .update({
+        'paymentStatus': 'Completed'
+      }); // Make sure this matches the values in your Firestore
+
+      // Send email notification via Cloud Functions
+      await _sendEmailNotification(captainEmail);
+
+      // Show success message
+      Fluttertoast.showToast(
+          msg: "Payment verified and email sent successfully!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: "Error verifying payment: $e",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+    }
+  }
+
+  // Function to send email notification using Firebase Cloud Functions
+  Future<void> _sendEmailNotification(String captainEmail) async {
+    await FirebaseFirestore.instance.collection('mail').add({
+      'to': captainEmail,
+      'message': {
+        'subject': 'Payment Verification Successful',
+        'text': 'Your registration payment has been verified successfully.',
+      },
+    });
   }
 }

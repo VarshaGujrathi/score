@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:score/LeaderboardPage.dart'; // Fixed import statement
 import 'package:score/SchedulePage.dart';
-import 'package:score/register.dart'; 
+import 'package:score/register.dart';
 
 class FootballPage extends StatelessWidget {
   @override
@@ -28,15 +28,35 @@ class FootballPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildFootballButton(context, Icons.person, 'Registration', RegisterPage()),
+            _buildFootballButton(
+                context,
+                Icons.person,
+                'Registration',
+                RegisterPage(
+                  selectedGame: '',
+                )),
             SizedBox(height: 12), // Reduced space between buttons
-            _buildFootballButton(context, Icons.leaderboard, 'Leaderboard', LeaderboardPage()),
+            _buildFootballButton(
+                context, Icons.leaderboard, 'Leaderboard', LeaderboardPage()),
             SizedBox(height: 12), // Reduced space between buttons
-            _buildFootballButton(context, Icons.schedule, 'Schedule', SchedulePage()),
+            _buildFootballButton(
+                context, Icons.schedule, 'Schedule', SchedulePage()),
             SizedBox(height: 12), // Reduced space between buttons
-            _buildFootballButton(context, Icons.book, 'Rulebook', RegisterPage()), // Replace with actual page
+            _buildFootballButton(
+                context,
+                Icons.book,
+                'Rulebook',
+                RegisterPage(
+                  selectedGame: '',
+                )), // Replace with actual page
             SizedBox(height: 12), // Reduced space between buttons
-            _buildFootballButton(context, Icons.emoji_events, 'Winner', RegisterPage()), // Replace with actual page
+            _buildFootballButton(
+                context,
+                Icons.emoji_events,
+                'Winner',
+                RegisterPage(
+                  selectedGame: '',
+                )), // Replace with actual page
           ],
         ),
       ),
@@ -70,7 +90,8 @@ class FootballPage extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white, // Button background color white
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Reduced padding
+        padding: EdgeInsets.symmetric(
+            vertical: 12, horizontal: 16), // Reduced padding
       ),
     );
   }
